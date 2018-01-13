@@ -1,0 +1,1 @@
+sap_streaming_server_url = 'http://localhost:8080'
