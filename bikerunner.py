@@ -1,4 +1,6 @@
+import config
 import utils
+from connection import connector
 from sensors.airpressure import AirPressureSensor
 from sensors.gpsmodule import GPSModule
 
@@ -20,8 +22,19 @@ def send_data():
     utils.send_data(data)
 
 
+def send_dummy():
+    data = [{
+        "ESP_OPS": "i",
+        "entity": 1,
+        "value": 50
+    }]
+    connector.post_data(config.data_streaming_url, data)
+
+
 def main():
-    utils.run_every_x_seconds(send_data, 0.5)
+    # utils.run_every_x_seconds(send_data, 0.5)
+
+    utils.run_every_x_seconds(send_dummy, 1)
 
 
 if __name__ == "__main__":
