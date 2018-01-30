@@ -32,5 +32,5 @@ def get_simulated_airpressure():
         print("Oh no! Sensor value too high")
         return max_value + random.random() * 5
 
-    return max(0, random.gauss(random_bike_state, 0.15))
+    return max(0, random.gauss(random_bike_state, 2))
 

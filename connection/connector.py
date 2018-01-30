@@ -5,7 +5,7 @@ import config
 sws_token = ""
 
 authentication_request = [
-    {"privilege": "write", "resourceType": "stream", "resource": "gbi_002/stream2/InputStream1"}
+    {"privilege": "write", "resourceType": "stream", "resource": "gbi_002/qbike/BikeInputStream"}
 ]
 
 
@@ -21,7 +21,7 @@ def authenticate():
 def post(path, data, headers):
     print(get_url(path), data, headers)
     response = requests.post(get_url(path), headers=headers, json=data)
-    print(response.reason, response.text)
+    print(response.status_code, response.reason, response.text)
     return response
 
 
@@ -31,13 +31,14 @@ last_request_unauthorized = False
 def post_data(path, data):
     global last_request_unauthorized
     response = post(path, data, get_authorization_header())
-    if response.status_code == 401 and last_request_unauthorized is not True:
+    if response.status_code == 401:
         print("Request was unauthorized, authenticate and retry again...")
-        last_request_unauthorized = True
+        # last_request_unauthorized = True
         authenticate()
         post_data(path, data)
     else:
-        last_request_unauthorized = False
+        # last_request_unauthorized = False
+        pass
 
 
 def get_url(path):

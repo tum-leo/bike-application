@@ -1,3 +1,7 @@
+import time
+
+import datetime
+
 import config
 import utils
 from connection import connector
@@ -13,13 +17,17 @@ def send_data():
 
     position = gps_module.get_position()
 
-    data = {
+    data = [{
+        "ESP_OPS": "i",
+        "bike_id": 99,
+        "sensor": 1,
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000"),
         "air_pressure": air_pressure_sensor.get_data(),
-        "longiture": position.longitude,
-        "latitude": position.latitude,
-    }
+        # "longiture": position.longitude,
+        # "latitude": position.latitude,
+    }]
 
-    utils.send_data(data)
+    connector.post_data(config.data_streaming_url, data)
 
 
 def send_dummy():
@@ -32,9 +40,9 @@ def send_dummy():
 
 
 def main():
-    # utils.run_every_x_seconds(send_data, 0.5)
+    utils.run_every_x_seconds(send_data, 1)
 
-    utils.run_every_x_seconds(send_dummy, 1)
+    # utils.run_every_x_seconds(send_dummy, 1)
 
 
 if __name__ == "__main__":
