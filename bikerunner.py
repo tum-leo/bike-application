@@ -19,7 +19,7 @@ def send_data():
 
     data = [{
         "ESP_OPS": "i",
-        "bike_id": 99,
+        "bike_id": 2,
         "sensor": 1,
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000"),
         "air_pressure": air_pressure_sensor.get_data(),

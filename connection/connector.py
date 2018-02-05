@@ -19,7 +19,7 @@ def authenticate():
 
 
 def post(path, data, headers):
-    print(get_url(path), data, headers)
+    print(data, headers)
     response = requests.post(get_url(path), headers=headers, json=data)
     print(response.status_code, response.reason, response.text)
     return response
@@ -54,4 +54,3 @@ def get_authorization_header():
         "authorization": "SWS-Token \"sws-token\"=\"{}\"".format(sws_token)
     }
 
-# http://h86sds.ucc.in.tum.de:9093/1/workspaces/gbi_002/projects/stream2/streams/InputStream1

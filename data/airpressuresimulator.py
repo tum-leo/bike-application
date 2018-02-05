@@ -5,8 +5,8 @@ import math
 
 min_value = 0
 max_value = 4
-probability_failure_high = 0.05
-probability_failure_low = 0.1
+probability_failure_high = 0
+probability_failure_low = 0
 
 pressure_is_decreasing = False
 
@@ -32,5 +32,5 @@ def get_simulated_airpressure():
         print("Oh no! Sensor value too high")
         return max_value + random.random() * 5
 
-    return max(0, random.gauss(random_bike_state, 2))
+    return max(0, random.gauss(random_bike_state, 0.2))
 
